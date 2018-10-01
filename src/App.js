@@ -24,12 +24,12 @@ let RecordForm = props => {
     const { handleSubmit } = props;
     return (
         <form onSubmit={handleSubmit}>
-            <Field type="time" name="time" component={InputField} label="What time the ducks are fed" min="00:00" max="23:59" pattern="[0-9]{2}:[0-9]{2}" required />
-            <Field type="text" name="food" component={InputField} label="What food the ducks are fed" required/>
-            <Field type="text" name="where" component={InputField} label="Where the ducks are fed" required/>
-            <Field type="text" name="many" component={InputField} label="How many ducks are fed" required/>
-            <Field type="text" name="kind" component={InputField} label="What kind of food the ducks are fed" required/>
-            <Field type="text" name="much" component={InputField} label="How much food the ducks are fed" required/>
+            <Field type="time" name="feedtime" component={InputField} label="What time the ducks are fed" min="00:00" max="23:59" default="00:00" pattern="[0-9]{2}:[0-9]{2}" required/>
+            <Field type="text" name="whatfood" component={InputField} label="What food the ducks are fed" required/>
+            <Field type="text" name="feedlocation" component={InputField} label="Where the ducks are fed" required/>
+            <Field type="number" name="manyducks" component={InputField} label="How many ducks are fed (numbers only)" required/>
+            <Field type="text" name="kindfood" component={InputField} label="What kind of food the ducks are fed" required/>
+            <Field type="text" name="muchfood" component={InputField} label="How much food the ducks are fed (grams)" required/>
             <button type="submit">Submit</button>
         </form>
     );
@@ -39,34 +39,34 @@ let RecordForm = props => {
 const validate = values => {
     const errors = {};
 
-    if (!values.time) {
+    if (!values.feedtime) {
         console.log('What time the ducks are fed?');
-        errors.time = 'Required';
+        errors.feedtime = 'Required';
     }
 
-    if (!values.food) {
+    if (!values.whatfood) {
         console.log('What food the ducks are fed?');
-        errors.food = 'Required';
+        errors.whatfood = 'Required';
     }
 
-    if (!values.where) {
+    if (!values.feedlocation) {
         console.log('Where the ducks are fed?');
-        errors.where = 'Required';
+        errors.feedlocation = 'Required';
     }
 
-    if (!values.many) {
+    if (!values.manyducks) {
         console.log('How many ducks are fed?');
-        errors.many = 'Required';
+        errors.manyducks = 'Required';
     }
 
-    if (!values.kind) {
+    if (!values.kindfood) {
         console.log('What kind of food the ducks are fed?');
-        errors.kind = 'Required';
+        errors.kindfood = 'Required';
     }
 
-    if (!values.much) {
+    if (!values.muchfood) {
         console.log('How much food the ducks are fed?');
-        errors.much = 'Required';
+        errors.muchfood = 'Required';
     }
 
     return errors;
@@ -85,28 +85,23 @@ class App extends Component {
         response: ''
     };
 
-    callApi = async() => {
-        const response = await fetch('/api/ping');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    };
-
     handleSubmit = values => {
-        console.log('Submitting the following values:');
-        console.log(`What time the ducks are fed: ${values.time}`);
-        console.log(`What food the ducks are fed: ${values.food}`);
-        console.log(`Where the ducks are fed: ${values.where}`);
-        console.log(`How many ducks are fed: ${values.many}`);
-        console.log(`What kind of food the ducks are fed: ${values.kind}`);
-        console.log(`How much food the ducks are fed: ${values.much}`);
-
-        // test /api/ping call
-        this.callApi()
-            .then(res => this.setState({
-                response: res.express
-            }))
-            .catch(err => console.log(err));
+        fetch('/api/records', {
+            method: 'post',
+            headers: {
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(values)
+        }).then(function (response) {
+            const body = response.json();
+            if (response.status !== 200) throw Error(body.message);
+            return body;
+        }).then(
+            res => this.setState({
+                response: "Thank you. "+res.message,
+            })
+        )
     };
 
     render() {

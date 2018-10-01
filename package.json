@@ -3,9 +3,12 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "express": "^4.16.3",
     "path": "^0.12.7",
+    "pg-promise": "^8.4.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
