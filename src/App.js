@@ -81,6 +81,17 @@ RecordForm = reduxForm({
 // define App component
 class App extends Component {
 
+    state = {
+        response: ''
+    };
+
+    callApi = async() => {
+        const response = await fetch('/api/ping');
+        const body = await response.json();
+        if (response.status !== 200) throw Error(body.message);
+        return body;
+    };
+
     handleSubmit = values => {
         console.log('Submitting the following values:');
         console.log(`What time the ducks are fed: ${values.time}`);
@@ -89,6 +100,13 @@ class App extends Component {
         console.log(`How many ducks are fed: ${values.many}`);
         console.log(`What kind of food the ducks are fed: ${values.kind}`);
         console.log(`How much food the ducks are fed: ${values.much}`);
+
+        // test /api/ping call
+        this.callApi()
+            .then(res => this.setState({
+                response: res.express
+            }))
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -102,6 +120,7 @@ class App extends Component {
                     Please fill up the following form and click the submit button.
                 </p>
                 <RecordForm onSubmit={this.handleSubmit}/>
+                <p className="App-intro">{this.state.response}</p>
             </div>
         );
     }
