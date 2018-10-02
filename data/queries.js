@@ -8,9 +8,8 @@ const options = {
 const pgp = require('pg-promise')(options);
 const db = pgp(
     {
-        //connectionString: process.env.DATABASE_URL,
-        connectionString: 'postgres://postgres:postgres@localhost:5432/ohducks',
-        //ssl: true,
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
     }
 );
 
@@ -21,9 +20,11 @@ module.exports = {
 
 // define functions
 function addRecord(req, res) {
-    req.body.many = parseInt(req.body.many);
-    req.body.much = parseInt(req.body.much);
-    const queryString = `insert into ohducks_v1(feedtime,whatfood,feedlocation,manyducks,kindfood,muchfood,createdon) values ('${req.body.feedtime}', '${req.body.whatfood}', '${req.body.feedlocation}', ${req.body.manyducks}, '${req.body.kindfood}', ${req.body.muchfood}, now());`;
+    req.body.manyducks = parseInt(req.body.manyducks);
+    req.body.muchfood = parseInt(req.body.muchfood);
+    req.body.feedregular = parseInt(req.body.feedregular);
+    console.log("feedregular: "+req.body.feedregular);
+    const queryString = `insert into ohducks_v1(feedtime,whatfood,feedlocation,manyducks,kindfood,muchfood,feedregular,createdon) values ('${req.body.feedtime}', '${req.body.whatfood}', '${req.body.feedlocation}', ${req.body.manyducks}, '${req.body.kindfood}', ${req.body.muchfood}, ${req.body.feedregular}, now());`;
     db.none(queryString)
         .then(function () {
             res.status(200)

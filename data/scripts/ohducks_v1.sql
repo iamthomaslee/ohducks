@@ -6,5 +6,6 @@ CREATE TABLE ohducks_v1 (
   manyducks     INTEGER,
   kindfood      VARCHAR,
   muchfood      INTEGER,
+  feedregular   INTEGER,
   createdon     TIMESTAMP
 );
