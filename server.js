@@ -34,4 +34,12 @@ app.post('/api/records', (req, res) => {
     db.addRecord(req, res);
 });
 
+app.get('/api/records', (req, res) => {
+    db.getRecords(req, res);
+});
+
+app.get('/api/records/:id', (req, res) => {
+    db.getRecord(req, res);
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
