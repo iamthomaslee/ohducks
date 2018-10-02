@@ -10,6 +10,8 @@ const hour = today.getHours() < 10 ? "0"+today.getHours() : today.getHours();
 const minute = today.getMinutes() < 10 ? "0"+today.getMinutes() : today.getMinutes();
 const initialTimeFormatted = today.getFullYear()+"-"+month+"-"+date+"T"+hour+":"+minute;
 
+const feedtime = new Date();
+
 // define InputField template
 const InputField = ({ input, label, type, min, max, step, meta: { touched, error, warning }}) =>
     <div>
