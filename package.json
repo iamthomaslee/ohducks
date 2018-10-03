@@ -28,5 +28,10 @@
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "heroku-postbuild": "yarn && yarn build"
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000/",
+  "engines": {
+    "node": "8.12.0"
+  },
+  "description": "This simple application collects data about feeding ducks in parks around the world.",
+  "main": "server.js"
 }
