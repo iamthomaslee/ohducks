@@ -24,7 +24,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "yarn && yarn build"
   },
   "proxy": "http://localhost:5000/"
 }
