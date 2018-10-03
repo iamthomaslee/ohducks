@@ -47,14 +47,14 @@ function addRecord(req, res) {
  *   get recent 20 records
  **/
 function getRecords(req, res) {
-    const queryString = 'select * from ohducks_v1 order by id desc limit 20;';
+    const queryString = 'select * from ohducks_v1 order by id desc limit 5;';
     db.any(queryString)
         .then(function (data) {
             res.status(200)
                 .json({
                     status: 'success',
                     data: data,
-                    message: 'Retrieved 100 recent records'
+                    message: 'Retrieved 5 recent records'
                 });
         })
         .catch(function (err) {

@@ -1,0 +1,29 @@
+.top-space {
+    margin-top: 1em !important;
+}
+.button-margin {
+    margin: 1em !important;
+}
+.time-helper {
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0;
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: 8px;
+    min-height: 1em;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1em;
+}
+.time-label {
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0;
+    font-size: 0.75rem;
+    text-align: left !important;
+    margin-top: 8px;
+    min-height: 1em;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1em;
+}
+.time-field input {
+    font-size: 1.2em;
+}
