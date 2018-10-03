@@ -34,7 +34,7 @@ const TimeInputField = ({ input, label, type, min, max, helper, meta: { touched,
         <div className="MuiFormControl-root-1">
         <label className="time-label">
             {label}
-        </label>
+        </label><br/>
         <input {...input} type={type} min={min} max={max}/>
         <p className="time-helper">{helper}</p>
         </div>
