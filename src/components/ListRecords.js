@@ -67,4 +67,4 @@ class ListRecords extends Component {
 }
 
 // RecordForm;
-export default (ListRecords);
+export default ListRecords;
